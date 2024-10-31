@@ -19,7 +19,7 @@ const App = () => {
   return (
     <>
     <h2>{title}</h2>
-    <form>
+    <form onSubmit={handleSubmit}> {/* Prevents default behavior, the page refresh */}
       <label htmlFor="firstName">First Name: </label>
       <input
           id="firstName"
@@ -34,28 +34,33 @@ const App = () => {
           value={formData.lastName} /* Dot notation to target the "formData" object */
           onChange={handleChange}
         />
+        <button type='submit'>Submit your name, for the algorithm</button>
     </form>
   </>
   )
 
   /* Functions */
 
-  /* function handleFirstNameChange(event) {
-    setFirstName(event.target.value)
-  }
-
-  function handleLastNameChange(event) {
-    setLastName(event.target.value)
-  } */
-
   function handleChange(event) {
     /* Replaces old object with new object */
-    /* Does so by targetting parameter inside of the above HTML objects above (Nam ) */
+    /* Does so by targetting parameter inside of the above HTML objects above (Name="firstName") */
     /* (Broooo wtf is this??) */
     setFormData( 
       {... formData, [event.target.name]: event.target.value }
     ) 
-    
+  }
+
+  /* Prevents page refresh from a form */
+  function handleSubmit(event) {
+    event.preventDefault()
+    console.log('The page has not refreshed... good')
+    // Sets title based on the formData's contents at the time of submission
+    setTitle(`Your name is: ${formData.firstName} ${formData.lastName}`)
+    // Clears form input
+    setFormData({ 
+      firstName: '', 
+      lastName: '' 
+    })
   }
 
 }
