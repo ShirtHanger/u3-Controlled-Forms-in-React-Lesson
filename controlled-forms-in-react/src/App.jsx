@@ -1,30 +1,51 @@
-import { useState } from 'react'
-import './App.css'
-
 // src/App.jsx
 
+import './App.css'
+
+// import the useState() hook
+import { useState } from 'react';
+
 const App = () => {
-  // construct the cityInput state
-  const [cityInput, setCityInput] = useState('');
+  // add placeholder text for the title
+  // we'll use the form to update this state by the end of this lesson
+  const [title, setTitle] = useState('The full name will appear here.');
+  // declaring state with an empty string as the initial value
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   return (
     <>
-      <label htmlFor="cityInput">City: </label>
-      <input id="cityInput" 
-      name="cityInput" 
-      type="text" 
-      value={cityInput} 
-      onChange={ handleChange }/> {/* Without onChange event handler, this wont update */}
-    </>
+    <h2>{title}</h2>
+    <form>
+      <label htmlFor="firstName">First Name: </label>
+      <input
+          id="firstName"
+          name="firstName"
+          value={firstName}
+          onChange={handleFirstNameChange}
+        />
+        <label htmlFor="lastName">Last Name: </label>
+        <input
+          id="lastName"
+          name="lastName"
+          value={lastName}
+          onChange={handleLastNameChange}
+        />
+    </form>
+  </>
   );
 
   /* Functions */
 
-  function handleChange(event) {
-    setCityInput(event.target.value)
+  function handleFirstNameChange(event) {
+    setFirstName(event.target.value)
   }
+
+  function handleLastNameChange(event) {
+    setLastName(event.target.value)
+  }
+
 };
 
 export default App;
-
 
